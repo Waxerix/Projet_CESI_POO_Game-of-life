@@ -5,7 +5,7 @@ Interface::Interface(){}
 void Interface::renderGrid(sf::RenderWindow &window,Grille G){
     int x,y;
     window.clear();
-    int cellSize = 10;
+    int cellSize = 5;
     
 
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
@@ -22,7 +22,7 @@ void Interface::renderGrid(sf::RenderWindow &window,Grille G){
 }
 
 void Interface::Run(){
-    int cellSize = 10;
+    int cellSize = 5;
     GestionFichier GF;
     std::string fichier="data/";
     std::string nom;
@@ -45,7 +45,7 @@ void Interface::Run(){
         }
         this->renderGrid(window,G);
 
-        sf::sleep(sf::milliseconds(100));
+        sf::sleep(sf::milliseconds(50));
 
         G.NewGrille();
     }
