@@ -24,12 +24,18 @@ void Interface::renderGrid(sf::RenderWindow &window,Grille G){
 void Interface::Run(){
     int cellSize = 10;
     GestionFichier GF;
-    std::string nom="data/test.txt";
-    Grille G=GF.GetGrille(nom);
+    std::string fichier="data/";
+    std::string nom;
+    std::cout << "Quel est le nom du fichier?" << std::endl;
+    std::cin >> nom;
+    Grille G=GF.GetGrille(fichier+nom);
     
     std::cout << "Grille: " << G.GetX() << "x" << G.GetY() << std::endl;
     sf::Vector2u winSize(G.GetX() * cellSize, G.GetY() * cellSize);
     sf::RenderWindow window(sf::VideoMode(winSize), "Game of Life");
+
+    //std::cout << "Combien d'itérations voulez vous?" << std::endl;
+    //std::cin >> times;
 
     while (window.isOpen()) {
         // pollEvent() now returns std::optional<Event> instead of taking a reference
@@ -37,9 +43,10 @@ void Interface::Run(){
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
-
-        renderGrid(window,G);
+        this->renderGrid(window,G);
 
         sf::sleep(sf::milliseconds(100));
+
+        G.NewGrille();
     }
 }
