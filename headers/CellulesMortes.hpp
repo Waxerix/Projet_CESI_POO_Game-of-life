@@ -1,7 +1,8 @@
-#include <../src/Cellules.cpp>
+#include "../headers/Cellules.hpp"
 
-class CellulesMortes {
+class CellulesMortes : public Cellules {
     public:
         CellulesMortes();
-        bool GetEtat();
+        bool GetEtat() const override;
+        void NewEtat() const override;
 };

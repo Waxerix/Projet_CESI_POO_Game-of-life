@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 class Cellules {
@@ -7,7 +8,7 @@ class Cellules {
         bool obstacle;
     public:
         Cellules();
-        bool GetEtat();
-        void NewEtat();
+        virtual bool GetEtat() const = 0;
+        virtual void NewEtat() const = 0;
         bool Obstacle();
 };

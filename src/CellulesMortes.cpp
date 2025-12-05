@@ -3,6 +3,10 @@
 CellulesMortes::CellulesMortes(){
 
 }
-bool CellulesMortes::GetEtat() {
+bool CellulesMortes::GetEtat()const {
     return false;
+}
+
+void CellulesMortes::NewEtat() const {
+    
 }

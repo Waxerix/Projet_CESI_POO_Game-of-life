@@ -3,6 +3,10 @@
 CellulesVivantes::CellulesVivantes(){
     
 }
-bool celluesVivantes::GetEtat() {
+bool CellulesVivantes::GetEtat() const{
     return true;
+}
+
+void CellulesVivantes::NewEtat() const{
+    
 }
