@@ -22,20 +22,28 @@ void Interface::renderGrid(sf::RenderWindow &window,Grille G){
 }
 
 void Interface::Run(){
+    int action,times=0,count=0;
+    bool save;
     int cellSize = 5;
     GestionFichier GF;
-    std::string fichier="data/";
     std::string nom;
     std::cout << "Quel est le nom du fichier?" << std::endl;
     std::cin >> nom;
-    Grille G=GF.GetGrille(fichier+nom);
+    Grille G=GF.GetGrille("data/"+nom+".txt");
     
     std::cout << "Grille: " << G.GetX() << "x" << G.GetY() << std::endl;
     sf::Vector2u winSize(G.GetX() * cellSize, G.GetY() * cellSize);
-    sf::RenderWindow window(sf::VideoMode(winSize), "Game of Life");
 
-    //std::cout << "Combien d'itérations voulez vous?" << std::endl;
-    //std::cin >> times;
+    std::cout << "Voulez-vous enregistrer les n premières itérations?\n 1.oui \n 2.non" << std::endl;
+    std::cin >> action;
+    if (action==1){
+        save=true;
+        std::cout << "Combien d'itérations voulez vous enregistrer?" << std::endl;
+        std::cin >> times;
+    }
+    else{save=false;}
+
+    sf::RenderWindow window(sf::VideoMode(winSize), "Game of Life");
 
     while (window.isOpen()) {
         // pollEvent() now returns std::optional<Event> instead of taking a reference
@@ -48,5 +56,11 @@ void Interface::Run(){
         sf::sleep(sf::milliseconds(50));
 
         G.NewGrille();
+
+        if (save && count<times){
+            count+=1;
+            GF.SaveGrille(G,nom,count);
+        }
+
     }
 }

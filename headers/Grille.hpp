@@ -16,5 +16,6 @@ public:
     void NewEtatMort(int x,int y,std::vector<std::vector<Cellules*>>& NewG);
     int GetX();
     int GetY();
+    bool GetObstacle(int x,int y);
     bool GetEtat(int x,int y);
 };

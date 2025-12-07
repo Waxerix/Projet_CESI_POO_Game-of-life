@@ -7,4 +7,5 @@ private:
 public:
     GestionFichier();
     Grille GetGrille(std::string fichier);
+    void SaveGrille(Grille &G,std::string fichier,int iteration);
 };

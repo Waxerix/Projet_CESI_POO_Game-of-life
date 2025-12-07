@@ -9,6 +9,5 @@ class Cellules {
     public:
         Cellules();
         virtual bool GetEtat() const = 0;
-        virtual void NewEtat() const = 0;
         bool Obstacle();
 };

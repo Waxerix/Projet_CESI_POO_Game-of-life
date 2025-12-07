@@ -1,8 +1,6 @@
 #include "../headers/Cellules.hpp"
 
-Cellules::Cellules(){
-
-}
+Cellules::Cellules(){}
 
 bool Cellules::Obstacle(){
     return this->obstacle;

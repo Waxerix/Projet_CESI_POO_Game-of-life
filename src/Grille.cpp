@@ -12,9 +12,13 @@ int Grille::GetX(){return x;}
 
 int Grille::GetY(){return y;}
 
+bool Grille::GetObstacle(int x,int y){
+    return this->grille[y][x]->Obstacle();
+}
+
 bool Grille::GetEtat(int x,int y){
-    if (!grille[y][x]) return false; // treat nullptr as dead cell
-    return grille[y][x]->GetEtat();
+    if (!this->grille[y][x]) return false; // treat nullptr as dead cell
+    return this->grille[y][x]->GetEtat();
 }
 
 void Grille::NewGrille(){
@@ -58,15 +62,16 @@ void Grille::NewGrille(){
                 if(this->GetEtat(x2,y2)){count+=1;}
                 else if(NewG[y][x]==nullptr){this->NewEtatMort(x,y,NewG);}
 
-                if(count<2 || count>3){NewG[y][x]=new CellulesMortes;}
-                else{NewG[y][x]=new CellulesVivantes;}
+                if((count<2 || count>3) && not this->GetObstacle(x,y)){NewG[y][x]=new CellulesMortes(false);}
+                else if(this->GetObstacle(x,y)) {NewG[y][x]=new CellulesVivantes(true);}
+                else{NewG[y][x]=new CellulesVivantes(false);}
             }
         }
     }
 
     for(int y=0;y<this->y;y++){
         for(int x=0;x<this->x;x++){
-            if(NewG[y][x]==nullptr){NewG[y][x]=new CellulesMortes;}
+            if(NewG[y][x]==nullptr){NewG[y][x]=new CellulesMortes(false);}
         }
     }
 
@@ -102,5 +107,6 @@ void Grille::NewEtatMort(int x,int y,std::vector<std::vector<Cellules*>>& NewG){
 
         if(this->GetEtat(x2,y2)){count+=1;}
 
-        if(count==3){NewG[y][x]=new CellulesVivantes;}
+        if(count==3 &&  not this->GetObstacle(x,y)){NewG[y][x]=new CellulesVivantes(false);}
+        else if(this->GetObstacle(x,y)) {NewG[y][x]=new CellulesMortes(true);}
 }
