@@ -5,7 +5,7 @@ Interface::Interface(){}
 void Interface::renderGrid(sf::RenderWindow &window,Grille G){
     int x,y;
     window.clear();
-    int cellSize = 5;
+    float cellSize = 800.0f / std::max(G.GetX(),G.GetY());
     
 
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
@@ -24,15 +24,15 @@ void Interface::renderGrid(sf::RenderWindow &window,Grille G){
 void Interface::Run(){
     int action,times=0,count=0;
     bool save;
-    int cellSize = 5;
     GestionFichier GF;
     std::string nom;
     std::cout << "Quel est le nom du fichier?" << std::endl;
     std::cin >> nom;
     Grille G=GF.GetGrille("data/"+nom+".txt");
+
+    float cellSize = 800.0f / std::max(G.GetX(),G.GetY());
     
     std::cout << "Grille: " << G.GetX() << "x" << G.GetY() << std::endl;
-    sf::Vector2u winSize(G.GetX() * cellSize, G.GetY() * cellSize);
 
     std::cout << "Voulez-vous enregistrer les n premières itérations?\n 1.oui \n 2.non" << std::endl;
     std::cin >> action;
@@ -43,6 +43,7 @@ void Interface::Run(){
     }
     else{save=false;}
 
+    sf::Vector2u winSize(G.GetX() * cellSize, G.GetY() * cellSize);
     sf::RenderWindow window(sf::VideoMode(winSize), "Game of Life");
 
     while (window.isOpen()) {

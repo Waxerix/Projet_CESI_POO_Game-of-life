@@ -7,6 +7,7 @@ private:
     std::vector<std::vector<Cellules*>> grille;
     int x;
     int y;
+    bool statique;
 public:
     Grille();
     void NewGrille();

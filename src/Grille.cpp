@@ -1,6 +1,6 @@
 #include "../headers/Grille.hpp"
 
-Grille::Grille(){}
+Grille::Grille(){this->statique=false;}
 
 void Grille::SetX(int x){this->x=x;}
 
@@ -22,6 +22,8 @@ bool Grille::GetEtat(int x,int y){
 }
 
 void Grille::NewGrille(){
+    if (this->statique){}
+    else{
     std::vector<std::vector<Cellules*>> NewG(y, std::vector<Cellules*>(x, nullptr));
 
     for(int y=0;y<this->y;y++){
@@ -74,8 +76,9 @@ void Grille::NewGrille(){
             if(NewG[y][x]==nullptr){NewG[y][x]=new CellulesMortes(false);}
         }
     }
-
-    this->grille=NewG;
+    if (this->grille==NewG){this->statique=true;}
+    else{this->grille=NewG;}
+}
 }
     
 void Grille::NewEtatMort(int x,int y,std::vector<std::vector<Cellules*>>& NewG){
